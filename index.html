@@ -1,0 +1,350 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Inteligencias Múltiples de Gardner</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: portada con rosetón de ocho nodos a la izquierda, secciones apiladas con selector de tarjetas + panel de detalle */
+:root{
+  --bg:#F2F5F8; --surface:#FFFFFF; --ink:#13202D; --muted:#51606F; --line:#D5DCE4; --accent:#1B6E7A; --accent-soft:#DCEEF0; --on-accent:#FFFFFF;
+  --i1:#C8452D; --i2:#2E6FD1; --i3:#7A4FC4; --i4:#D98A0B; --i5:#C23A8A; --i6:#1F9A6B; --i7:#8A6F3A; --i8:#5C9E1E;
+  --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1821; --surface:#18232F; --ink:#E8EEF3; --muted:#9DAEBD; --line:#2B3A49; --accent:#5CC7D3; --accent-soft:#16363C; --on-accent:#0F1821;
+  --i1:#F0765E; --i2:#6FA3F2; --i3:#A98BE6; --i4:#F0B349; --i5:#E877B5; --i6:#4CCB98; --i7:#C7A96A; --i8:#92CC55; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1821; --surface:#18232F; --ink:#E8EEF3; --muted:#9DAEBD; --line:#2B3A49; --accent:#5CC7D3; --accent-soft:#16363C; --on-accent:#0F1821;
+  --i1:#F0765E; --i2:#6FA3F2; --i3:#A98BE6; --i4:#F0B349; --i5:#E877B5; --i6:#4CCB98; --i7:#C7A96A; --i8:#92CC55; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;margin:0;
+  padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin-inline:auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px 48px;align-items:center;padding-block:40px 24px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hero h1{font-size:clamp(2.6rem,8vw,4.6rem);font-weight:800;letter-spacing:-.02em;margin-top:10px}
+.hero .dates{color:var(--muted);margin-top:8px}
+.quote{margin:24px 0 0;padding:16px 0 0;border-top:2px solid var(--ink);font-family:var(--font-display);font-size:clamp(1.2rem,3.4vw,1.55rem);font-weight:500;line-height:1.3}
+.quote small{display:block;font-family:var(--font-body);font-size:.85rem;color:var(--muted);margin-top:8px;font-weight:400}
+.art{display:flex;justify-content:center;min-width:0}
+.art svg{width:100%;max-width:420px;height:auto}
+.spin{transform-origin:200px 200px;animation:spin 48s linear infinite}
+.node{animation:pulse 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.18)}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:0;list-style:none;font-size:.85rem;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+
+/* Secciones */
+section{padding-block:40px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:8px;margin-bottom:24px;max-width:62ch}
+.sec-head h2{font-size:clamp(1.7rem,5vw,2.3rem);font-weight:700}
+.sec-head p{color:var(--muted)}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px;scrollbar-width:thin}
+.tab{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.92rem}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.picker{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:6px;align-content:start;min-height:84px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--c,var(--accent));transform:translateY(-2px)}
+.card .t{font-weight:600;font-size:.95rem;line-height:1.25}
+.card .k{display:flex;align-items:center;gap:6px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--c,var(--accent));box-shadow:inset 0 0 0 1px var(--c,var(--accent))}
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;min-width:0}
+.detail h3{font-size:1.35rem;font-weight:700;display:flex;gap:10px;align-items:center}
+.detail p+p,.detail h3+p{margin-top:12px}
+.detail ul{margin:12px 0 0;padding-left:20px;display:grid;gap:6px}
+.detail .swatch{width:14px;height:14px;border-radius:50%;background:var(--c,var(--accent));flex:none}
+.detail.flash{animation:flash .35s ease-out}
+@keyframes flash{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Caso */
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:28px}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;min-width:0}
+.block h3{font-size:1.2rem;font-weight:700;margin-bottom:10px}
+.block .tag{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.block ul{margin:8px 0 0;padding-left:20px;display:grid;gap:6px}
+.sub{font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin:8px 0 14px}
+.change{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.change .block.after{background:var(--accent-soft);border-color:var(--accent)}
+
+/* Microcápsula */
+.beats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.beat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.beat .sec{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);font-size:.9rem}
+.beat h3{font-size:1.05rem}
+.beat p{font-size:.93rem;color:var(--muted)}
+
+footer{padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .picker{grid-template-columns:1fr}
+  .case-grid,.change{grid-template-columns:1fr}
+  .beats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:460px){.beats{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.spin,.node{animation:none}.card,.detail.flash{transition:none;animation:none}}
+</style>
+
+<main class="wrap">
+
+<!-- 1. Portada -->
+<header class="hero">
+  <div>
+    <p class="eyebrow">Teorías pedagógicas contemporáneas</p>
+    <h1>Howard Gardner</h1>
+    <p class="dates">Psicólogo y profesor en Harvard · nacido en 1943 · autor de <em>Frames of Mind</em> (1983)</p>
+    <blockquote class="quote">
+      La inteligencia es la capacidad de resolver problemas o elaborar productos valiosos en una o más culturas.
+      <small>Definición de inteligencia en la teoría de las Inteligencias Múltiples</small>
+    </blockquote>
+    <ul class="legend" aria-label="Las ocho inteligencias">
+      <li><span class="dot" style="--c:var(--i1)"></span>Lingüística</li>
+      <li><span class="dot" style="--c:var(--i2)"></span>Lógico-matemática</li>
+      <li><span class="dot" style="--c:var(--i3)"></span>Espacial</li>
+      <li><span class="dot" style="--c:var(--i4)"></span>Corporal-cinestésica</li>
+      <li><span class="dot" style="--c:var(--i5)"></span>Musical</li>
+      <li><span class="dot" style="--c:var(--i6)"></span>Interpersonal</li>
+      <li><span class="dot" style="--c:var(--i7)"></span>Intrapersonal</li>
+      <li><span class="dot" style="--c:var(--i8)"></span>Naturalista</li>
+    </ul>
+  </div>
+  <div class="art">
+    <svg viewBox="0 0 400 400" role="img" aria-label="Ocho círculos de colores girando alrededor de un centro: las ocho inteligencias">
+      <circle cx="200" cy="200" r="150" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 7"/>
+      <circle cx="200" cy="200" r="96" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+      <g class="spin">
+        <g>
+          <line x1="200" y1="200" x2="200" y2="50" stroke="var(--line)"/><line x1="200" y1="200" x2="306" y2="94" stroke="var(--line)"/>
+          <line x1="200" y1="200" x2="350" y2="200" stroke="var(--line)"/><line x1="200" y1="200" x2="306" y2="306" stroke="var(--line)"/>
+          <line x1="200" y1="200" x2="200" y2="350" stroke="var(--line)"/><line x1="200" y1="200" x2="94" y2="306" stroke="var(--line)"/>
+          <line x1="200" y1="200" x2="50" y2="200" stroke="var(--line)"/><line x1="200" y1="200" x2="94" y2="94" stroke="var(--line)"/>
+        </g>
+        <circle class="node" style="animation-delay:0s" cx="200" cy="50" r="26" fill="var(--i1)"/>
+        <circle class="node" style="animation-delay:.5s" cx="306" cy="94" r="26" fill="var(--i2)"/>
+        <circle class="node" style="animation-delay:1s" cx="350" cy="200" r="26" fill="var(--i3)"/>
+        <circle class="node" style="animation-delay:1.5s" cx="306" cy="306" r="26" fill="var(--i4)"/>
+        <circle class="node" style="animation-delay:2s" cx="200" cy="350" r="26" fill="var(--i5)"/>
+        <circle class="node" style="animation-delay:2.5s" cx="94" cy="306" r="26" fill="var(--i6)"/>
+        <circle class="node" style="animation-delay:3s" cx="50" cy="200" r="26" fill="var(--i7)"/>
+        <circle class="node" style="animation-delay:3.5s" cx="94" cy="94" r="26" fill="var(--i8)"/>
+      </g>
+      <circle cx="200" cy="200" r="56" fill="var(--ink)"/>
+      <text x="200" y="196" text-anchor="middle" font-family="Bricolage Grotesque, Trebuchet MS, sans-serif" font-weight="800" font-size="44" fill="var(--bg)">8</text>
+      <text x="200" y="222" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="12" letter-spacing="2" fill="var(--bg)">MENTES</text>
+    </svg>
+  </div>
+</header>
+
+<!-- 2. Ficha conceptual interactiva -->
+<section id="ficha" aria-labelledby="h-ficha">
+  <div class="sec-head">
+    <h2 id="h-ficha">Ficha conceptual</h2>
+    <p>Elegí una pestaña y tocá cada tarjeta para abrir su explicación.</p>
+  </div>
+  <div class="tabs" role="tablist" id="tabs" aria-label="Aspectos de la teoría"></div>
+  <div class="picker">
+    <div class="cards" id="fichaCards"></div>
+    <article class="detail" id="fichaDetail" aria-live="polite"></article>
+  </div>
+</section>
+
+<!-- 3. Caso educativo -->
+<section id="caso" aria-labelledby="h-caso">
+  <div class="sec-head">
+    <h2 id="h-caso">Caso aplicado: el agua en 5.º grado</h2>
+    <p>Situación inventada para mostrar cómo se ve la teoría dentro de un aula.</p>
+  </div>
+
+  <div class="case-grid">
+    <div class="block">
+      <span class="tag">El desafío</span>
+      <h3>Una unidad que solo se lee y se contesta</h3>
+      <p>En un 5.º grado de 28 alumnos, la unidad “El ciclo del agua” se trabaja con un texto, un cuestionario y una prueba escrita. Un tercio del curso no llega a terminar las actividades. Mateo, de 10 años, se mueve en el banco y dibuja en los bordes de la carpeta. Lo rotularon “no presta atención”. Después de la prueba escrita dijo: “Yo de esto no sé”, y empezó a faltar a las clases de Ciencias.</p>
+    </div>
+    <div class="block">
+      <span class="tag">Cómo lo resuelve la teoría</span>
+      <h3>Más de un camino hacia el mismo contenido</h3>
+      <p>Para Gardner el problema no está en Mateo, sino en haber elegido una sola puerta de entrada. El equipo docente decide relevar intereses y capacidades, presentar el tema por varias inteligencias y evaluar con más de un tipo de producto. Además cuida los comentarios en voz alta, porque una humillación frente al grupo puede cerrar una inteligencia para siempre.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Estrategias docentes: ocho estaciones</h3>
+  <div class="picker">
+    <div class="cards" id="stCards"></div>
+    <article class="detail" id="stDetail" aria-live="polite"></article>
+  </div>
+
+  <div class="change">
+    <div class="block">
+      <span class="tag">Antes</span>
+      <h3>Un solo camino</h3>
+      <ul>
+        <li>Mateo evita la tarea y se etiqueta como “distraído”.</li>
+        <li>Aprobar depende de leer y escribir.</li>
+        <li>Los alumnos aprenden de memoria para rendir.</li>
+      </ul>
+    </div>
+    <div class="block after">
+      <span class="tag">Cambios esperados en los estudiantes</span>
+      <h3>Varias puertas abiertas</h3>
+      <ul>
+        <li>Mateo participa desde el movimiento y el dibujo, y vuelve a sentirse capaz.</li>
+        <li>Mejoran la motivación y el clima de aula, con menos problemas de conducta.</li>
+        <li>Los grupos cooperan y aparecen líderes distintos en cada estación.</li>
+        <li>Cada alumno explica el ciclo del agua con sus propias palabras y con su propio producto.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Microcápsula -->
+<section id="capsula" aria-labelledby="h-cap">
+  <div class="sec-head">
+    <h2 id="h-cap">Microcápsula de 40 segundos</h2>
+    <p>Guion sugerido para grabar con la voz del grupo y imágenes del micrositio.</p>
+  </div>
+  <div class="beats">
+    <div class="beat"><span class="sec">0 a 8 s</span><h3>La pregunta</h3><p>“¿Sos inteligente?” Mostrar el rosetón de la portada girando.</p></div>
+    <div class="beat"><span class="sec">8 a 20 s</span><h3>La idea</h3><p>Gardner define la inteligencia como capacidad y propone ocho, no una sola.</p></div>
+    <div class="beat"><span class="sec">20 a 32 s</span><h3>El aula</h3><p>Resumen del caso de Mateo y las ocho estaciones del agua.</p></div>
+    <div class="beat"><span class="sec">32 a 40 s</span><h3>El cierre</h3><p>Si una puerta no abre, hay al menos siete más para probar.</p></div>
+  </div>
+</section>
+
+<footer>Micrositio elaborado a partir del material de cátedra “La Teoría de las Inteligencias Múltiples”, basado en la obra de Howard Gardner.</footer>
+</main>
+
+<script>
+(function(){
+  var C = function(n){return 'var(--i'+n+')'};
+
+  var FICHA = {
+    conceptos:{label:'Conceptos centrales', cards:[
+      {t:'Inteligencia como capacidad', k:'Concepto', c:C(2), body:
+        '<p>Gardner la define como la capacidad de resolver problemas o elaborar productos valiosos en una o más culturas.</p><p>Al llamarla capacidad, la vuelve una destreza que se puede desarrollar. Reconoce el componente genético, pero el ambiente, las experiencias y la educación hacen la diferencia.</p>'},
+      {t:'Ocho inteligencias', k:'Concepto', c:C(3), body:
+        '<p>Cada persona tiene, por lo menos, ocho inteligencias, desarrolladas en distinto nivel y combinadas de manera única.</p><ul><li>Lingüística</li><li>Lógico-matemática</li><li>Espacial</li><li>Corporal-cinestésica</li><li>Musical</li><li>Interpersonal</li><li>Intrapersonal</li><li>Naturalista</li></ul>'},
+      {t:'Todas valen lo mismo', k:'Concepto', c:C(4), body:
+        '<p>Einstein no es más inteligente que Michael Jordan: sus inteligencias pertenecen a campos distintos.</p><p>El problema es que la escuela puso en primer lugar la lingüística y la lógico-matemática, y trata a las demás como secundarias.</p>'},
+      {t:'Inteligencia emocional', k:'Concepto', c:C(6), body:
+        '<p>La inteligencia intrapersonal (entenderse a uno mismo) y la interpersonal (entender a los demás) forman juntas lo que se llama inteligencia emocional.</p><p>Determinan la capacidad de conducir la propia vida de manera satisfactoria, y la escuela suele darla por sabida sin enseñarla.</p>'},
+      {t:'Experiencias cristalizantes', k:'Concepto', c:C(8), body:
+        '<p>Son hitos de la historia personal que despiertan un talento. A los cuatro años, Einstein recibió una brújula de su padre y años después la recordó como el origen de su deseo de entender el universo.</p>'},
+      {t:'Experiencias paralizantes', k:'Concepto', c:C(1), body:
+        '<p>Bloquean el desarrollo de una inteligencia. Un docente que humilla un dibujo frente al grupo, o un adulto que grita “deja de hacer ruido”, puede llevar al alumno a decidir que “no sabe hacerlo”.</p><p>El miedo, la vergüenza y la culpa frenan el crecimiento intelectual.</p>'}
+    ]},
+    aprendizaje:{label:'Cómo entiende el aprendizaje', cards:[
+      {t:'No todos aprendemos igual', k:'Aprendizaje', c:C(2), body:
+        '<p>Las personas no tienen los mismos intereses ni las mismas capacidades, y nadie puede aprender todo lo que hay para aprender. Aprender es un camino personal.</p>'},
+      {t:'Los puntos fuertes son una puerta', k:'Aprendizaje', c:C(4), body:
+        '<p>Un mismo contenido se puede presentar de formas muy diversas. El alumno lo asimila mejor cuando parte de sus capacidades y aprovecha sus fortalezas.</p>'},
+      {t:'Aprender con significado', k:'Aprendizaje', c:C(8), body:
+        '<p>Se aprende mejor al involucrarse en proyectos con sentido, donde el propio conocimiento y el crecimiento personal se hacen visibles.</p><p>También se aprende fuera de la escuela, en espacios de formación más informales.</p>'},
+      {t:'El reconocimiento de los adultos', k:'Aprendizaje', c:C(5), body:
+        '<p>Los alumnos viven pendientes de la mirada de los adultos. La opinión de padres y docentes pesa más que la de los medios en el desarrollo del intelecto.</p>'}
+    ]},
+    ensenanza:{label:'Cómo entiende la enseñanza', cards:[
+      {t:'Varias entradas al tema', k:'Enseñanza', c:C(1), body:
+        '<p>Si el alumno no comprende por la inteligencia que elegimos, existen por lo menos siete caminos más para intentarlo. Enseñar es abrir varias puertas al mismo contenido.</p>'},
+      {t:'Aulas enriquecidas', k:'Enseñanza', c:C(3), body:
+        '<p>El entorno ofrece materiales y espacios para interactuar de distintas formas con compañeros y objetos, a elección del alumno.</p>'},
+      {t:'Evaluación plural', k:'Enseñanza', c:C(6), body:
+        '<p>No se puede evaluar a una persona multinteligente con una sola inteligencia. Hace falta un sistema de evaluación con productos y formatos variados.</p>'},
+      {t:'Currículum y trabajo en equipo', k:'Enseñanza', c:C(7), body:
+        '<p>Transformar una escuela exige modificar el currículum y trabajar en equipo. Docentes voluntarios, directivos, alumnos y familias participan, y no hay un modelo para copiar: cada escuela crea el suyo.</p>'}
+    ]},
+    docente:{label:'Rol del docente', cards:[
+      {t:'Evaluador de intereses y capacidades', k:'Rol docente', c:C(7), body:
+        '<p>Observa qué le interesa a cada alumno y en qué se destaca, antes de decidir cómo enseñar.</p>'},
+      {t:'Gestor estudiante-currículum', k:'Rol docente', c:C(2), body:
+        '<p>Conecta a cada estudiante con los contenidos del programa a través de caminos que le resulten accesibles.</p>'},
+      {t:'Gestor escuela-comunidad', k:'Rol docente', c:C(6), body:
+        '<p>Vincula lo que pasa en el aula con las familias y el entorno, porque hogar y escuela son los grandes responsables de la educación.</p>'},
+      {t:'Coordinador de procesos', k:'Rol docente', c:C(4), body:
+        '<p>Organiza las actividades y equipos para que varios procesos de aprendizaje convivan en la misma clase.</p>'},
+      {t:'Supervisor del equilibrio', k:'Rol docente', c:C(5), body:
+        '<p>Cuida que estudiante, evaluación, currículum y comunidad estén en equilibrio, y que sus palabras alienten en vez de paralizar.</p>'}
+    ]},
+    estudiante:{label:'Rol del estudiante', cards:[
+      {t:'Protagonista con perfil propio', k:'Rol estudiante', c:C(3), body:
+        '<p>Cada estudiante llega con una combinación única de inteligencias. Su perfil es el punto de partida del aprendizaje.</p>'},
+      {t:'Elige cómo mostrar lo que sabe', k:'Rol estudiante', c:C(1), body:
+        '<p>Puede interactuar con compañeros y objetos a su elección, y presentar lo aprendido en producciones distintas: un texto, una maqueta, una canción, una demostración.</p>'},
+      {t:'Aprende con otros', k:'Rol estudiante', c:C(6), body:
+        '<p>El trabajo en grupo desarrolla cooperación y liderazgo, y produce un efecto sinérgico: el todo es mayor que la suma de las partes.</p>'},
+      {t:'Se conoce a sí mismo', k:'Rol estudiante', c:C(7), body:
+        '<p>Reflexiona sobre sus fortalezas y debilidades, fija metas y regula sus emociones. Es la inteligencia intrapersonal puesta en juego.</p>'}
+    ]}
+  };
+
+  var STATIONS = [
+    {t:'Lingüística', k:'Estación', c:C(1), body:'<p><strong>La autobiografía de una gota.</strong> Cada grupo escribe y lee al curso el relato de una gota de agua durante todo su recorrido.</p>'},
+    {t:'Lógico-matemática', k:'Estación', c:C(2), body:'<p><strong>Cuánto se evapora.</strong> Miden el nivel de agua de un frasco durante cinco días, anotan los datos y arman un gráfico.</p>'},
+    {t:'Espacial', k:'Estación', c:C(3), body:'<p><strong>El agua del barrio.</strong> Dibujan un mapa o una maqueta con el recorrido del agua desde la lluvia hasta la canilla.</p>'},
+    {t:'Corporal-cinestésica', k:'Estación', c:C(4), body:'<p><strong>Estados del agua en movimiento.</strong> Representan con el cuerpo, aros y cuerdas la evaporación, la condensación y la precipitación. Es la estación donde Mateo se destaca y guía a sus compañeros.</p>'},
+    {t:'Musical', k:'Estación', c:C(5), body:'<p><strong>La tormenta sonora.</strong> Componen un ritmo con percusión corporal y objetos que va de la llovizna a la tormenta.</p>'},
+    {t:'Interpersonal', k:'Estación', c:C(6), body:'<p><strong>Reporteros del agua.</strong> Entrevistan a compañeros de otros grados y a sus familias sobre cómo cuidan el agua en casa.</p>'},
+    {t:'Intrapersonal', k:'Estación', c:C(7), body:'<p><strong>Bitácora personal.</strong> Anotan qué les costó, qué les salió bien y qué quieren mejorar en la próxima estación.</p>'},
+    {t:'Naturalista', k:'Estación', c:C(8), body:'<p><strong>Plantas y riego.</strong> Observan plantas del patio regadas con distintas cantidades de agua y registran lo que cambia.</p>'}
+  ];
+
+  function mountPicker(cardsEl, detailEl, items, titlePrefix){
+    cardsEl.innerHTML = '';
+    var buttons = [];
+    function open(i, animate){
+      buttons.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+      var it = items[i];
+      detailEl.style.setProperty('--c', it.c);
+      detailEl.innerHTML = '<h3><span class="swatch"></span>' + it.t + '</h3>' + it.body;
+      if (animate){ detailEl.classList.remove('flash'); void detailEl.offsetWidth; detailEl.classList.add('flash'); }
+    }
+    items.forEach(function(it, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'card';
+      b.style.setProperty('--c', it.c);
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<span class="k"><span class="dot" style="--c:' + it.c + '"></span>' + it.k + '</span><span class="t">' + it.t + '</span>';
+      b.addEventListener('click', function(){ open(i, true); });
+      cardsEl.appendChild(b);
+      buttons.push(b);
+    });
+    open(0, false);
+  }
+
+  var tabsEl = document.getElementById('tabs');
+  var keys = Object.keys(FICHA);
+  var tabBtns = [];
+  function showTab(k){
+    tabBtns.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.k === k ? 'true' : 'false'); });
+    mountPicker(document.getElementById('fichaCards'), document.getElementById('fichaDetail'), FICHA[k].cards);
+  }
+  keys.forEach(function(k){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tab';
+    b.setAttribute('role', 'tab');
+    b.dataset.k = k;
+    b.textContent = FICHA[k].label;
+    b.addEventListener('click', function(){ showTab(k); });
+    tabsEl.appendChild(b);
+    tabBtns.push(b);
+  });
+  showTab(keys[0]);
+  mountPicker(document.getElementById('stCards'), document.getElementById('stDetail'), STATIONS);
+})();
+</script>
+
+</body></html>
